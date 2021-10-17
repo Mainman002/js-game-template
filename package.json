@@ -1,0 +1,21 @@
+{
+  "name": "blank-js-project",
+  "version": "1.0.0",
+  "description": "A blank javascript project.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "2d",
+    "game",
+    "javascript",
+    "js"
+  ],
+  "author": "Johnathan Mueller",
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^15.1.2"
+  }
+}

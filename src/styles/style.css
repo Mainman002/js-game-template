@@ -1,0 +1,45 @@
+html{
+    /* background-color: rgb(53, 93, 130); */
+    background-color: rgb(15, 17, 22);
+    width:100%;
+    height:auto;
+    overflow: hidden;
+}
+
+img{
+    display: none;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+#canvas{
+    /* background-color: rgb(53, 93, 130); */
+    border: 1px solid rgb(0, 187, 255);
+    width:1088px;
+    height:640px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#bg{
+    /* background-color: rgb(53, 93, 130); */
+    /* border: 1px solid rgb(0, 187, 255); */
+    width:1088px;
+    height:640px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#overlay{
+    /* background-color: rgb(53, 93, 130); */
+    /* border: 1px solid rgb(0, 187, 255); */
+    width:1088px;
+    height:640px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
