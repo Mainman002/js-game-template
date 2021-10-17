@@ -12,6 +12,7 @@ export class Example {
         this.angle = 0 * Math.PI / 180.0;
         this.speed = speed;
 
+        this.interact = false;
         this.markedForDeletion = false;
     }
 
@@ -37,11 +38,22 @@ export class Example {
         console.log("Added Gear", this.game.objects.length);
     }
 
-    update(deltaTime){
+update(deltaTime){
+
+        // Rotate
         this.angle += this.speed * Math.PI / 180.0;
+
+        // Mouse Interaction
+        if (this.game.mouse.pos.x > this.pos.x-this.size.w*0.5 && this.game.mouse.pos.x < this.pos.x-this.size.w*0.5 + this.size.w && 
+            this.game.mouse.pos.y > this.pos.y-this.size.h*0.5 && this.game.mouse.pos.y < this.pos.y-this.size.h*0.5 + this.size.h){
+                this.interact = true;
+            } else {
+                this.interact = false;
+            }
     }
 
     draw(){
+        // Display image, rotate canvas, reset canvas rotation
         this.ctx.save();
         this.ctx.translate(this.pos.x, this.pos.y);
         this.ctx.rotate(this.angle);
@@ -50,18 +62,11 @@ export class Example {
             this.pos.x-this.pos.x-this.size.w*0.5, this.pos.y-this.pos.y-this.size.h*0.5, this.size.w, this.size.h);
         this.ctx.restore();
 
-        // Debug show object bounds
-        // if (this.game.mouse.activeTower === this.type) {
-        //     this.#drawBevelOutline(this.ctx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 2, 'Green', 1.0);
-        // }
-
-        // Show bounds when hovering object
-        if (this.game.mouse.pos.x > this.pos.x-this.size.w*0.5 && this.game.mouse.pos.x < this.pos.x-this.size.w*0.5 + this.size.w){
-            if (this.game.mouse.pos.y > this.pos.y-this.size.h*0.5 && this.game.mouse.pos.y < this.pos.y-this.size.h*0.5 + this.size.h){
-                this.#drawBevelOutline(this.overlayCtx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 2, 'Red', 1);
-            }
-        }
-
+        // Show Mouse Interact Bounds
+        if (this.interact){
+            this.#drawBevelOutline(this.overlayCtx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 2, 'Red', 1);
+        } 
     }
 }
+
 
