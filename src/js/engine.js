@@ -1,5 +1,5 @@
 // Map Array
-import {Example} from './modules/example.js';
+import {Example, Gear_01, Gear_02, Gear_03} from './modules/example.js';
 
 window.addEventListener('load', function(){
     const border = 100;
@@ -112,21 +112,16 @@ window.addEventListener('load', function(){
         init(){
             console.log("Game Started");
 
-            const offset = {x:64, y:-70};
+            const gears_offset = {x:64, y:-70};
 
             // Add Gear 1
-            this.instance(this.objects, Example, {x:canvas.width*0.5+offset.x, y:canvas.height*0.5+64+offset.y}, 0.4);
-            this.objects[0].angle = 0 * Math.PI / 180.0;
+            this.instance(this.objects, Gear_01, {x:canvas.width*0.5+gears_offset.x, y:canvas.height*0.5+64+gears_offset.y}, 0.4);
 
             // Add Gear 2
-            this.instance(this.objects, Example, {x:canvas.width*0.5-140+offset.x, y:canvas.height*0.5+140+offset.y}, -0.4);
-            this.objects[1].size = {w:160, h:160};
-            this.objects[1].angle = 0 * Math.PI / 180.0;
+            this.instance(this.objects, Gear_02, {x:canvas.width*0.5-140+gears_offset.x, y:canvas.height*0.5+140+gears_offset.y}, -0.4);
 
             // Add Gear 3
-            this.instance(this.objects, Example, {x:canvas.width*0.5-35+offset.x, y:canvas.height*0.5+240+offset.y}, 0.4);
-            this.objects[2].size = {w:140, h:140};
-            this.objects[1].angle = 0 * Math.PI / 180.0;
+            this.instance(this.objects, Gear_03, {x:canvas.width*0.5-35+gears_offset.x, y:canvas.height*0.5+240+gears_offset.y}, 0.4);
         }
 
         update(deltaTime){

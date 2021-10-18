@@ -1,17 +1,12 @@
 // Towers
 export class Example {
-    constructor(game, pos, speed){
+    constructor(game){
         this.game = game;
         this.ctx = game.ctx;
         this.overlayCtx = game.overlayCtx;
-
-        this.pos = pos;
-        this.size = {w:180, h:180};
         this.image = gear_icon;
         this.spriteSize = {w:256, h:256};
         this.angle = 0 * Math.PI / 180.0;
-        this.speed = speed;
-
         this.interact = false;
         this.markedForDeletion = false;
     }
@@ -66,6 +61,36 @@ update(deltaTime){
         if (this.interact){
             this.#drawBevelOutline(this.overlayCtx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 2, 'Red', 1);
         } 
+    }
+}
+
+
+export class Gear_01 extends Example {
+    constructor(game, pos, speed){
+        super(game);
+        this.pos = pos;
+        this.size = {w:180, h:180};
+        this.speed = speed;
+    }
+}
+
+
+export class Gear_02 extends Example {
+    constructor(game, pos, speed){
+        super(game);
+        this.pos = pos;
+        this.size = {w:160, h:160};
+        this.speed = speed;
+    }
+}
+
+
+export class Gear_03 extends Example {
+    constructor(game, pos, speed){
+        super(game);
+        this.pos = pos;
+        this.size = {w:140, h:140};
+        this.speed = speed;
     }
 }
 
