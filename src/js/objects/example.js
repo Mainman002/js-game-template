@@ -21,17 +21,17 @@ export class Example {
     }
 
 update(deltaTime){
+    // Rotate
+    this.angle += this.speed * Math.PI / 180.0;
 
-        // Rotate
-        this.angle += this.speed * Math.PI / 180.0;
-
-        // Mouse Interaction
-        if (this.game.mouse.pos.x > this.pos.x-this.size.w*0.5 && this.game.mouse.pos.x < this.pos.x-this.size.w*0.5 + this.size.w && 
-            this.game.mouse.pos.y > this.pos.y-this.size.h*0.5 && this.game.mouse.pos.y < this.pos.y-this.size.h*0.5 + this.size.h){
-                this.hovering = true;
-            } else {
-                this.hovering = false;
-            }
+    // Mouse Interaction
+    if (this.game.mouse.pos.x > this.pos.x-this.size.w*0.5 && this.game.mouse.pos.x < this.pos.x-this.size.w*0.5 + this.size.w && 
+        this.game.mouse.pos.y > this.pos.y-this.size.h*0.5 && this.game.mouse.pos.y < this.pos.y-this.size.h*0.5 + this.size.h){
+            this.hovering = true;
+            // this.hovering = this.game.mouse.click;
+        } else {
+            this.hovering = false;
+        }
     }
 
     draw(){
@@ -48,7 +48,7 @@ update(deltaTime){
         if (!this.game.mouse.click && this.hovering) {
             Graphics.bevel_outline(this.overlayCtx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 2, 'Red', 1);
         } else if (this.game.mouse.click && this.hovering) {
-            Graphics.bevel_outline(this.overlayCtx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 2, 'Green', 1);
+            Graphics.bevel_outline(this.overlayCtx, this.pos.x-this.size.w*0.5, this.pos.y-this.size.h*0.5, this.size.w, this.size.h, 6, 'Green', 1);
         }
     }
 }
