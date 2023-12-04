@@ -1,5 +1,20 @@
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-size:12px;
+    height:100vh;
+    margin:0px;
+    padding:0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    text-transform:uppercase;
+    width:100%;
+}
+
 html{
-    /* background-color: rgb(53, 93, 130); */
     background-color: rgb(15, 17, 22);
     width:100%;
     height:auto;
@@ -12,7 +27,6 @@ img{
 }
 
 #canvas{
-    /* background-color: rgb(53, 93, 130); */
     border: 1px solid rgb(0, 187, 255);
     width:1088px;
     height:640px;
@@ -23,8 +37,6 @@ img{
 }
 
 #bg{
-    /* background-color: rgb(53, 93, 130); */
-    /* border: 1px solid rgb(0, 187, 255); */
     width:1088px;
     height:640px;
     position: absolute;
@@ -34,8 +46,6 @@ img{
 }
 
 #overlay{
-    /* background-color: rgb(53, 93, 130); */
-    /* border: 1px solid rgb(0, 187, 255); */
     width:1088px;
     height:640px;
     position: absolute;
@@ -43,3 +53,4 @@ img{
     left:50%;
     transform: translate(-50%, -50%);
 }
+

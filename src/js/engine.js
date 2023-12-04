@@ -1,103 +1,31 @@
 // Map Array
-import {Example, Gear_01, Gear_02, Gear_03} from './modules/example.js';
+import {Example, Gear_01, Gear_02, Gear_03} from './objects/example.js';
+import * as Screen from './modules/screen.js';
+import * as Mouse from './modules/mouse.js';
+import * as Touch from './modules/touch.js';
+import * as Image_Loader from './modules/image_loader.js';
+import * as Graphics from './modules/graphics.js';
 
 window.addEventListener('load', function(){
-    const border = 100;
-    const aspect = {w:6.5, h:4};
-    const img_smooth = true;
-
     const ctx = canvas.getContext('2d');
     const overlayCtx = overlay.getContext('2d');
-
-    canvas.width = 1088;
-    canvas.height = 640;
-
-    overlay.width = canvas.width;
-    overlay.height = canvas.height;
-
-    screen_resize(ctx, canvas);
-    screen_resize(overlayCtx, overlay);
-
-
-    window.addEventListener('resize', function(e) {
-        screen_resize(ctx, canvas);
-        screen_resize(overlayCtx, overlay);
-    });
-
-
-    function screen_resize(_ctx, _canvas){
-        let w = window.innerWidth;
-        let h = w * (aspect.h / aspect.w);
-
-        if (h < window.innerHeight){
-            // Check window width
-            w = window.innerWidth;
-            h = w * (aspect.h / aspect.w);
-        } else {
-            // Check window height
-            h = window.innerHeight;
-            w = h * (aspect.w / aspect.h);
-        }
-
-        _canvas.style.width = `${w - border}px`;
-        _canvas.style.height = `${h - border}px`;
-
-        // Graphic sharpness
-        _ctx.mozImageSmoothingEnabled = img_smooth;
-        _ctx.msImageSmoothingEnabled = img_smooth;
-        _ctx.imageSmoothingEnabled = img_smooth;
-    }
-
-
-    window.addEventListener('mousemove', function(e) {
-        let bounds = canvas.getBoundingClientRect();
-
-        // get the mouse coordinates, subtract the canvas top left and any scrolling
-        game.mouse.pos.x = e.pageX - bounds.left - scrollX;
-        game.mouse.pos.y = e.pageY - bounds.top - scrollY;
-
-        // first normalize the mouse coordinates from 0 to 1 (0,0) top left
-        // off canvas and (1,1) bottom right by dividing by the bounds width and height
-        game.mouse.pos.x /= bounds.width; 
-        game.mouse.pos.y /= bounds.height; 
-
-        // then scale to canvas coordinates by multiplying the normalized coords with the canvas resolution
-        game.mouse.pos.x *= canvas.width;
-        game.mouse.pos.y *= canvas.height;
-    });
-
-
-    window.addEventListener('mouseleave', function(e) {
-        game.mouse.pos.x = null;
-        game.mouse.pos.y = null;
-
-        game.mouse.click = false;
-    });
-
-
-    function draw_text(_ctx, _text, _font, _size, _align, _color, _a, _pos){
-        _ctx.globalAlpha = _a;
-        _ctx.textAlign = _align;
-        _ctx.fillStyle = _color;
-        _ctx.font = `${_size}px ${_font}`;
-        _ctx.fillText(`${_text}`, _pos.x, _pos.y);
-        _ctx.globalAlpha = 1;
-    }
-
-
-    function draw_box(_ctx, _size, _color, _a, _pos){
-        _ctx.globalAlpha = _a;
-        _ctx.fillStyle = _color;
-        _ctx.fillRect(_pos.x, _pos.y, _size.w, _size.h);
-        _ctx.globalAlpha = 1;
-    }
-
 
     // Main Game Class ----------------------------------------
     class Game {
         constructor(size){
-            this.ctx = ctx;
-            this.overlayCtx = overlayCtx;
+            this.debug = false;
+
+            this.resolution = {w: 1280, h: 800};
+
+            this.canvas_list = [
+                {cx: ctx, ca: canvas}, 
+                {cx: overlayCtx, ca: overlay}
+            ];
+
+            this.images = {
+                gear_icon: Image_Loader.load('Src/images/gear.png'),
+            };
+
             this.size = size;
 
             this.mouse = {
@@ -132,11 +60,11 @@ window.addEventListener('load', function(){
             this.objects.forEach(ob => ob.draw());
 
             // Draw Text
-            draw_text(ctx, "Blank JS Project", 'Noto Sans', 40, "center", 'Gold', 1, {x:canvas.width*0.5, y:canvas.height*0.5-168});
+            Graphics.text(ctx, "Blank JS Project", 'Noto Sans', 40, "center", 'Gold', 1, {x:canvas.width*0.5, y:canvas.height*0.5-168});
 
             // Show Mouse Position
             if (this.mouse.pos.x || this.mouse.pos.y) {
-                draw_box(overlayCtx, {w:32, h:32}, 'Teal', 1, {x:this.mouse.pos.x-16, y:this.mouse.pos.y-16})
+                Graphics.box(overlayCtx, {w:32, h:32}, 'Teal', 1, {x:this.mouse.pos.x-16, y:this.mouse.pos.y-16})
             }
         }
 
@@ -160,11 +88,18 @@ window.addEventListener('load', function(){
 
     // Update loop ---------------------------------------
     const game = new Game(ctx, {w:canvas.width, h:canvas.height});
+    Screen.init(game);
     game.init();
+
+    Mouse.move(game, canvas);
+    Mouse.leave(game);
+    Mouse.down(game, canvas);
+    Mouse.up(game);
+    Touch.init(game);
+
     let lastTime = 1;
     function animate(timeStamp){
-        game.ctx.clearRect(0, 0, canvas.width, canvas.height);
-        game.overlayCtx.clearRect(0, 0, overlay.width, overlay.height);
+        for (let i = 0; i < game.canvas_list.length; ++i) game.canvas_list[i].cx.clearRect(0,0,game.canvas_list[i].ca.width, game.canvas_list[i].ca.height);
 
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
@@ -174,8 +109,6 @@ window.addEventListener('load', function(){
         requestAnimationFrame(animate);
     }
     animate();
-
-
 });
 
 
