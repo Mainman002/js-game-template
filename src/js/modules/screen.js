@@ -1,6 +1,54 @@
 export function init(main) {
     if (main.debug) console.log("Screen Manager Loaded");
 
+    // Check if fullscreen is supported
+    const fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
+
+    if (fullscreenEnabled) {
+        const element = document.documentElement; // You can replace this with the specific element you want to make fullscreen
+
+        // Function to enter fullscreen mode
+        function enterFullscreen() {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) { // Firefox
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullScreen) { // Chrome and Safari
+                element.webkitRequestFullScreen();
+            }
+        }
+
+        // Function to exit fullscreen mode
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+
+        // Toggle fullscreen mode
+        function toggleFullscreen() {
+            if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // You can trigger fullscreen based on user interaction, for example, a button click
+        const fullscreenButton = document.getElementById('fullscreenButton'); // Replace with your button's ID
+
+        if (fullscreenButton) {
+            fullscreenButton.addEventListener('click', toggleFullscreen);
+        }
+    } else {
+        console.log("Fullscreen not supported on this device/browser.");
+    }
+
+
     for ( let i = 0; i < main.canvas_list.length; ++i ) {
         main.canvas_list[i].ca.width = main.resolution.w;
         main.canvas_list[i].ca.height = main.resolution.h;

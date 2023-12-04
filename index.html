@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
     <meta name="color-scheme" content="light dark">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <title>Blank JS Project</title>
@@ -10,7 +11,8 @@
     <script type="module" src="src/js/engine.js"></script>
 </head>
 <body>
-    <div>
+    <button id="fullscreenButton" style="user-select: none;">Fullscreen</button>
+    <div id="mainDiv">
         <canvas id="canvas"></canvas>
         <canvas id="overlay"></canvas>
     </div>
