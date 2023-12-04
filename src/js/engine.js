@@ -23,7 +23,7 @@ window.addEventListener('load', function(){
             ];
 
             this.images = {
-                gear_icon: Image_Loader.load('Src/images/gear.png'),
+                gear_icon: Image_Loader.load('src/images/gear.png'),
             };
 
             this.size = size;
