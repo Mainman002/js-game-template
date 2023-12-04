@@ -17,28 +17,31 @@ export function init(main) {
 }
   
 export function resize(main, _ctx, _canvas) {
-    const aspect = { w: 16, h: 10 };
+    const border = 3;
+    const aspect = {w:16, h:10};
     const img_smooth = true;
-    const border = 100;
+    let w = window.innerWidth;
+    let h = w * (aspect.h / aspect.w);
 
-    let targetWidth = window.innerWidth - border;
-    let targetHeight = targetWidth * (aspect.h / aspect.w);
-
-    if (targetHeight > window.innerHeight - border) {
-        targetHeight = window.innerHeight - border;
-        targetWidth = targetHeight * (aspect.w / aspect.h);
+    if (h < window.innerHeight){
+        // Check window width
+        w = window.innerWidth;
+        h = w * (aspect.h / aspect.w);
+    } else {
+        // Check window height
+        h = window.innerHeight;
+        w = h * (aspect.w / aspect.h);
     }
 
-    if (main.debug) console.log("Resized", "W", Math.floor(targetWidth), "H", Math.floor(targetHeight));
+    if (main.debug) console.log("Resized", "W", Math.floor(w), "H", Math.floor(h));
 
-    _canvas.style.width = `${targetWidth}px`;
-    _canvas.style.height = `${targetHeight}px`;
+    _canvas.style.width = `${w - border}px`;
+    _canvas.style.height = `${h - border}px`;
 
     // Graphic sharpness
     _ctx.mozImageSmoothingEnabled = img_smooth;
     _ctx.msImageSmoothingEnabled = img_smooth;
     _ctx.imageSmoothingEnabled = img_smooth;
 }
-
   
   

@@ -1,12 +1,10 @@
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
-    font-size:12px;
-    text-transform:uppercase;
+    font-size: 12px;
+    text-transform: uppercase;
     background-color: rgb(15, 17, 22);
     margin: 0;
+    padding: 0;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -14,9 +12,13 @@ body {
     height: 100vh;
 }
 
+
 div {
     border: solid 1px rgb(0, 191, 255);
-    max-width: 100vw;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
     text-align: center;
     position: relative;
@@ -29,8 +31,11 @@ img{
 
 #canvas,
 #overlay {
+    width: 100%;
+    height: auto;
     display: block;
     margin: 0 auto;
+    padding: 0;
 }
 
 #canvas {
