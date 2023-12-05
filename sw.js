@@ -1,5 +1,5 @@
-const path = '/js_game_template';
-const app_prefix = 'js_game_template';
+const path = '/js-game-template';
+const app_prefix = 'js-game-template';
 const version = '0.0.01';
 const urls = [
   `${path}/`,

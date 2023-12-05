@@ -1,16 +1,16 @@
 {
-    "name": "js_game_template",
-    "short_name": "js_game_template",
+    "name": "js-game-template",
+    "short_name": "js-game-template",
     "description": "Basic blank javascript game template",
-    "scope": "/js_game_template/",
-    "start_url": "/js_game_template/",
+    "scope": "/js-game-template/",
+    "start_url": "/js-game-template/",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
     "orientation": "landscape",
     "display": "standalone",
     "icons": [
       {
-        "src": "/js_game_template/src/images/gear.png",
+        "src": "/js-game-template/src/images/gear.png",
         "type": "image/png",
         "sizes": "250x250"
       }

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    
     <meta name="color-scheme" content="light dark">
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <title>Blank JS Project</title>
+    <link rel="canonical" href="https://mainman002.github.io/js-game-template/">
+    <link rel="manifest" href="/js-game-template/manifest.webmanifest" crossorigin="use-credentials">
     <link rel="stylesheet" href="src/styles/style.css" />
     <script type="module" src="src/js/engine.js"></script>
 </head>
@@ -16,5 +17,13 @@
         <canvas id="canvas"></canvas>
         <canvas id="overlay"></canvas>
     </div>
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register(
+            '/js-game-template/sw.js',
+            { scope: '/js-game-template/' }
+            )
+        }
+    </script>
 </body>
 </html>
